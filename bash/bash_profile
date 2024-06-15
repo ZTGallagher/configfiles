@@ -18,8 +18,8 @@ export BAT_THEME=Dracula
 ## eza
 alias ls="eza --color=always -snew --git"
 
-## dracula dircolors (for BAT)
-eval "$(dircolors ~/.dir_colors/dircolors)"
+## dracula dircolors
+# eval "$(dircolors ~/.dir_colors/dircolors)"
 
 ## zoxide
 eval "$(zoxide init bash)"
