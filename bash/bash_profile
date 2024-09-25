@@ -8,6 +8,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export GPG_TTY=$(tty)
+alias nv="nvim"
+export EDITOR=$(which nvim)
 
 ## fzf
 eval "$(fzf --bash)"
@@ -16,7 +18,8 @@ eval "$(fzf --bash)"
 export BAT_THEME=Dracula
 
 ## eza
-alias ls="eza --color=always -snew --git"
+alias ls="eza --color=always --icons=auto --git"
+alias lt="eza -l --color=always -snew --icons=auto --git"
 
 ## dracula dircolors
 # eval "$(dircolors ~/.dir_colors/dircolors)"
@@ -24,3 +27,11 @@ alias ls="eza --color=always -snew --git"
 ## zoxide
 eval "$(zoxide init bash)"
 alias cd="z"
+
+## Add Homebrew binaries to $PATH
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+## Starship
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
+eval "$(starship init bash)"
+
