@@ -1,0 +1,22 @@
+# Git config
+
+# If doing signing:
+# git config --global gpg.format ssh # Signs with OpenSSH, easier to do, goes with:
+# git config --global user.signingkey ~/.ssh/id_ed25519 # Specifies signing key location
+
+[push]
+	default = simple
+[init]
+	defaultBranch = main
+[alias]
+	stasha = stash --all
+	bblame = git blame -w -C -C -C
+[rerere]
+	enabled = true
+[column]
+	ui = auto
+[branch]
+	sort = --committerdate
+[user]
+	name = Zachary Gallagher
+	email = ZTGallagher@gmail.com
