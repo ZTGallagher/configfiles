@@ -1,7 +1,10 @@
-## Alias config
+eval "$(starship init zsh)"
+
+## Generic Aliases
 alias k=kubectl
 alias t=terraform
 alias terrafrom=terraform
+
 
 ## Neovim
 export NVM_DIR="$HOME/.nvm"
@@ -32,9 +35,6 @@ alias lt="eza -l --color=always -snew --icons=auto --git"
 ## zoxide
 eval "$(zoxide init zsh)"
 alias cd="z"
-
-## Add Homebrew binaries to $PATH
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 ## Starship
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
