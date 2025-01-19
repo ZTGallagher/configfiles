@@ -1,25 +1,28 @@
 # Add Homebrew taps
 
-# Install Homebrew utils
-brew "k9s"
-brew "go"
+# Infra utils
+brew "kubectl"
+brew "opentofu"
 brew "awscli"
+brew "k9s"
+
+# Coding utils
 brew "go"
+brew "neovim"
+brew "jq"
+brew "yq"
+
+# Shell utils
+brew "starship"
 brew "zoxide"
 brew "tldr"
 brew "thefuck"
 brew "eza"
 brew "ripgrep"
-brew "neovim"
 brew "duf"
 brew "gdu"
 brew "bat"
 brew "fzf"
-brew "opentofu"
-brew "jq"
-brew "yq"
-brew "awscli"
-brew "starship"
 
 # Install cask utils
 cask "font-hack-nerd-font"
