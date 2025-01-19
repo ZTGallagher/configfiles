@@ -19,6 +19,7 @@ brew "opentofu"
 brew "jq"
 brew "yq"
 brew "awscli"
+brew "starship"
 
 # Install cask utils
 cask "font-hack-nerd-font"
