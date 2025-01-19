@@ -1,7 +1,6 @@
 # Add Homebrew taps
 
 # Install Homebrew utils
-brew "fish"
 brew "k9s"
 brew "go"
 brew "awscli"
