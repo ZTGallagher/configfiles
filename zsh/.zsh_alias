@@ -1,0 +1,14 @@
+## Generic Aliases
+alias k=kubectl
+alias t=tofu
+
+# zoxide
+alias cd="z"
+
+# neovim
+alias nv="nvim"
+
+## eza
+alias ls="eza --color=always --icons=auto --git"
+alias lt="eza -l --color=always -snew --icons=auto --git"
+
