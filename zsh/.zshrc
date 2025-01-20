@@ -8,6 +8,10 @@ fi
 ## Homebrew
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
+## Starship (only use when not using p10k)
+eval "$(starship init zsh)"
+eval "$(starship completions zsh)"
+
 ## BAT
 export BAT_THEME=Dracula
 
