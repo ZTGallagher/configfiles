@@ -14,13 +14,13 @@ export BAT_THEME=Dracula
 ## dracula dircolors
 # eval "$(dircolors ~/.dir_colors/dircolors)"
 
-#startup programs
+# Startup
 eval "$(zoxide init zsh)"
 eval "$(fzf --zsh)"
 eval $(thefuck --alias)
 autoload -U compinit; compinit
 
-# history management
+# History Stuff
 HISTSIZE=5000
 HISTFILE=~/.config/zsh/.zsh_history
 SAVEHIST=5000
@@ -33,11 +33,15 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
-# using plugin manager antidote
+## Antidote plugin manager
 source /home/linuxbrew/.linuxbrew/opt/antidote/share/antidote/antidote.zsh
 antidote load ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
 
-# enables history substring search
+## Bindkeys
+bindkey '^[[1;5D' backward-word
+bindkey '^[[1;5C' forward-word
+bindkey '^H' backward-delete-word
+bindkey '^F' autosuggest-accept
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
