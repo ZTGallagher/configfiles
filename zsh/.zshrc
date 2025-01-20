@@ -34,7 +34,7 @@ setopt hist_ignore_dups
 setopt hist_find_no_dups
 
 # using plugin manager antidote
-source ~/.config/zsh/.antidot/antidote.zsh
+source /home/linuxbrew/.linuxbrew/opt/antidote/share/antidote/antidote.zsh
 antidote load ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
 
 # enables history substring search
