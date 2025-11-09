@@ -1,4 +1,5 @@
 # Add Homebrew taps
+tap "charmbracelet/tap"
 
 # Infra utils
 brew "kubectl"
@@ -8,6 +9,7 @@ brew "k9s"
 
 # Coding utils
 brew "go"
+brew "godoc"
 brew "neovim"
 brew "jq"
 brew "yq"
@@ -24,5 +26,20 @@ brew "gdu"
 brew "bat"
 brew "fzf"
 
+
+# ZSH customization
+brew "zsh-autosuggestions"
+brew "zsh-syntax-highlighting"
+
+# Taps
+## Charm
+brew "charmbracelet/tap/freeze"
+
+# PeopleInc
+brew "npm"
+brew "java"
+brew "btop"
+
 # Install cask utils
 cask "font-hack-nerd-font"
+cask "gcloud-cli"

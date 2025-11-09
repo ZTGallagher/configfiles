@@ -11,12 +11,13 @@
 [alias]
 	stasha = stash --all
 	bblame = git blame -w -C -C -C
+	co = checkout
 [rerere]
 	enabled = true
 [column]
 	ui = auto
 [branch]
-	sort = --committerdate
+	sort = -committerdate
 [user]
 	name = Zachary Gallagher
 	email = ZTGallagher@gmail.com
