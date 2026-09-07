@@ -1,23 +1,24 @@
-eval "$(starship init zsh)"
-
 ## Generic Aliases
 alias k=kubectl
 alias t=terraform
 alias terrafrom=terraform
-
+alias gits="git status"
+alias gs="git status"
+alias ddm=". /usr/local/bin/ddm"
 
 ## Neovim
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/zsh_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                  # This loads nvm
+[ -s "$NVM_DIR/zsh_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 export GPG_TTY=$(tty)
 alias nv="nvim"
 export EDITOR=$(which nvim)
 
 ## Enable Zsh completion
+fpath=(/Users/zachary.gallagher/.docker/completions $fpath)
 autoload -Uz compinit
-compinit
+compinit -i
 
 ## fzf
 eval "$(fzf --zsh)"
@@ -37,8 +38,42 @@ eval "$(zoxide init zsh)"
 alias cd="z"
 
 ## Starship
-export STARSHIP_CONFIG=~/.config/starship/starship.toml
+export STARSHIP_CONFIG="${STARSHIP_CONFIG:-$HOME/.config/starship/starship.toml}"
 eval "$(starship init zsh)"
 
-
 eval "$(thefuck --alias)"
+
+# Bindkeys
+bindkey "^H" vi-backward-kill-word
+bindkey "^[f" forward-word
+bindkey "^[b" backward-word
+bindkey "^[[H" beginning-of-line
+bindkey "^[[F" end-of-line
+bindkey "^F" end-of-line
+
+# Java
+export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
+
+# Go
+export PATH="$PATH:/Users/zachary.gallagher/go/bin"
+
+# Created by `pipx` on 2025-01-27 20:29:50
+export PATH="$PATH:/Users/zachary.gallagher/.local/bin"
+
+# ZSH plugins
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Added by Windsurf
+export PATH="/Users/zachary.gallagher/.codeium/windsurf/bin:$PATH"
+
+# XDG variables
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+# Custom convenience aliases
+alias fixvpn="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
+alias wtab="wezterm cli set-tab-title"
+export PATH="/opt/homebrew/opt/gradle@8/bin:$PATH"

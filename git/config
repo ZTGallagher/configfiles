@@ -1,8 +1,6 @@
-# Git config
-
-# If doing signing:
-# git config --global gpg.format ssh # Signs with OpenSSH, easier to do, goes with:
-# git config --global user.signingkey ~/.ssh/id_ed25519 # Specifies signing key location
+# Shared git config — machine-specific identity lives in ~/.gitconfig.local
+# (created per machine, never tracked; see the restore checklist for the
+# work/personal snippets).
 
 [push]
 	default = simple
@@ -10,7 +8,7 @@
 	defaultBranch = main
 [alias]
 	stasha = stash --all
-	bblame = git blame -w -C -C -C
+	bblame = blame -w -C -C -C
 	co = checkout
 [rerere]
 	enabled = true
@@ -18,6 +16,7 @@
 	ui = auto
 [branch]
 	sort = -committerdate
-[user]
-	name = Zachary Gallagher
-	email = ZTGallagher@gmail.com
+[pull]
+	rebase = true
+[include]
+	path = ~/.gitconfig.local

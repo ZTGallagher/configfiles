@@ -1,20 +1,37 @@
-# Add Homebrew taps
+# Taps
 tap "charmbracelet/tap"
+tap "hashicorp/tap"
+tap "jandedobbeleer/oh-my-posh"
 
 # Infra utils
 brew "kubectl"
 brew "opentofu"
 brew "awscli"
 brew "k9s"
+brew "hashicorp/tap/vault"
+brew "k3d"
+brew "argo"
+brew "dive"
+brew "docker-buildx"
+brew "docker-compose"
 
 # Coding utils
 brew "go"
-brew "godoc"
+brew "go-task"
 brew "neovim"
 brew "jq"
 brew "yq"
+brew "gradle@8"
+brew "gradle-completion"
+brew "rust"
+brew "pipx"
+brew "poetry"
+brew "pdm"
+brew "uv"
+brew "mongosh"
 
 # Shell utils
+brew "jandedobbeleer/oh-my-posh/oh-my-posh"
 brew "starship"
 brew "zoxide"
 brew "tldr"
@@ -25,7 +42,11 @@ brew "duf"
 brew "gdu"
 brew "bat"
 brew "fzf"
-
+brew "glow"
+brew "tree"
+brew "watch"
+brew "gawk"
+brew "dos2unix"
 
 # ZSH customization
 brew "zsh-autosuggestions"
@@ -38,8 +59,13 @@ brew "charmbracelet/tap/freeze"
 # PeopleInc
 brew "npm"
 brew "java"
+brew "openjdk@21"
 brew "btop"
 
 # Install cask utils
 cask "font-hack-nerd-font"
 cask "gcloud-cli"
+cask "neovide-app"
+cask "docker-desktop"
+cask "loop"
+cask "stats"

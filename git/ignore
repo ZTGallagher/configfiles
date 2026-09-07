@@ -1,3 +1,1 @@
-.devbox/
-devbox.json
-devbox.lock
+**/.claude/settings.local.json

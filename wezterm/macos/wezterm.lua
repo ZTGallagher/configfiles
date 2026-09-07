@@ -7,10 +7,10 @@ local config = {
 	use_fancy_tab_bar = false,
 	audible_bell = "Disabled",
 
-	window_background_opacity = 0.8,
+	window_background_opacity = 0.9,
 	text_background_opacity = 0.6,
-	-- color_scheme = "Dracula (Official)",
 	color_scheme = "Tokyo Night Moon",
+	-- color_scheme = "Dracula (Official)",
 	-- color_scheme = "Rosé Pine Moon (Gogh)",
 }
 
@@ -22,6 +22,17 @@ config.visual_bell = {
 }
 config.colors = {
 	visual_bell = "#202020",
+	tab_bar = {
+		background = "#1a1b26",
+		inactive_tab = {
+			bg_color = "#1f2335",
+			fg_color = "#a9b1d6",
+		},
+		inactive_tab_hover = {
+			bg_color = "#24283b",
+			fg_color = "#7aa2f7",
+		},
+	},
 }
 
 -- default_prog = { 'C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe' },

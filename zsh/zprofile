@@ -1,0 +1,7 @@
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# source ~/.zshrc
+
+# Created by `pipx` on 2025-01-27 20:29:50
+export PATH="$PATH:/Users/zachary.gallagher/.local/bin"
