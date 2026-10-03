@@ -70,6 +70,10 @@ vim.opt.confirm = true
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
+-- Split window management
+vim.keymap.set("n", "<leader>v", "<cmd>vsplit<CR>", { desc = "Open [V]ertical split (side-by-side)" })
+vim.keymap.set("n", "<leader>-", "<cmd>split<CR>", { desc = "Open horizontal split (top/bottom)" })
+vim.keymap.set("n", "<leader>x", "<cmd>close<CR>", { desc = "Close current split" })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
@@ -202,12 +206,13 @@ require("lazy").setup({
 		end,
 	},
 
-	{
-		"goolord/alpha-nvim",
-		config = function()
-			require("alpha").setup(require("alpha.themes.dashboard").config)
-		end,
-	},
+	-- Disabled: conflicts with Snacks.dashboard (see :checkhealth snacks)
+	-- {
+	-- 	"goolord/alpha-nvim",
+	-- 	config = function()
+	-- 		require("alpha").setup(require("alpha.themes.dashboard").config)
+	-- 	end,
+	-- },
 
 	{
 		"rbong/vim-flog",
@@ -341,7 +346,8 @@ require("lazy").setup({
 					return vim.fn.executable("make") == 1
 				end,
 			},
-			{ "nvim-telescope/telescope-ui-select.nvim" },
+			-- Disabled: conflicts with Snacks.picker's vim.ui.select (see :checkhealth snacks)
+			-- { "nvim-telescope/telescope-ui-select.nvim" },
 
 			-- Useful for getting pretty icons, but requires a Nerd Font.
 			{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
@@ -382,16 +388,17 @@ require("lazy").setup({
 						enable_preview = true,
 					},
 				},
-				extensions = {
-					["ui-select"] = {
-						require("telescope.themes").get_dropdown(),
-					},
-				},
+				-- Disabled: conflicts with Snacks.picker's vim.ui.select (see :checkhealth snacks)
+				-- extensions = {
+				-- 	["ui-select"] = {
+				-- 		require("telescope.themes").get_dropdown(),
+				-- 	},
+				-- },
 			})
 
 			-- Enable Telescope extensions if they are installed
 			pcall(require("telescope").load_extension, "fzf")
-			pcall(require("telescope").load_extension, "ui-select")
+			-- pcall(require("telescope").load_extension, "ui-select")
 
 			-- See `:help telescope.builtin`
 			local builtin = require("telescope.builtin")
@@ -515,6 +522,22 @@ require("lazy").setup({
 
 					-- Find references for the word under your cursor.
 					map("grr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+
+					-- Populate the quickfix list with LSP references, then step through
+					-- them linearly with ]r / [r (like * then n/N, but across the workspace).
+					map("<leader>rr", function()
+						vim.lsp.buf.references(nil, {
+							on_list = function(options)
+								vim.fn.setqflist(options.items)
+							end,
+						})
+					end, "[R]eferences to quickfix")
+					map("]r", function()
+						pcall(vim.cmd.cnext)
+					end, "Next [R]eference")
+					map("[r", function()
+						pcall(vim.cmd.cprev)
+					end, "Prev [R]eference")
 
 					-- Jump to the implementation of the word under your cursor.
 					--  Useful when your language has ways of declaring types without an actual implementation.
@@ -994,7 +1017,7 @@ require("lazy").setup({
 	},
 
 	{ -- Collection of various small independent plugins/modules
-		"echasnovski/mini.nvim",
+		"nvim-mini/mini.nvim",
 		config = function()
 			-- Better Around/Inside textobjects
 			--
@@ -1010,6 +1033,9 @@ require("lazy").setup({
 			-- - sd'   - [S]urround [D]elete [']quotes
 			-- - sr)'  - [S]urround [R]eplace [)] [']
 			require("mini.surround").setup()
+
+			-- Auto-close brackets, parens, quotes
+			require("mini.pairs").setup()
 
 			-- Simple and easy statusline.
 			--  You could remove this setup call if you don't like it,
@@ -1097,6 +1123,142 @@ require("lazy").setup({
 	-- Or use telescope!
 	-- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
 	-- you can continue same window with `<space>sr` which resumes last telescope search
+	--
+	{
+		"stevearc/oil.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = {
+			default_file_explorer = true,
+			-- Oil takes over netrw, so `<leader>pv` will now open Oil
+		},
+		keys = {
+			{ "-", "<cmd>Oil<cr>", desc = "Open parent directory" },
+		},
+	},
+	{
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		config = function()
+			local harpoon = require("harpoon")
+			harpoon:setup()
+
+			-- Basic Harpoon keymaps
+			vim.keymap.set("n", "<leader>a", function()
+				harpoon:list():add()
+			end, { desc = "Harpoon Add" })
+
+			vim.keymap.set("n", "<C-e>", function()
+				harpoon.ui:toggle_quick_menu(harpoon:list())
+			end, { desc = "Harpoon Menu" })
+
+			-- Quick jumps
+			vim.keymap.set("n", "<C-1>", function()
+				harpoon:list():select(1)
+			end, { desc = "Harpoon 1" })
+			vim.keymap.set("n", "<C-2>", function()
+				harpoon:list():select(2)
+			end, { desc = "Harpoon 2" })
+			vim.keymap.set("n", "<C-3>", function()
+				harpoon:list():select(3)
+			end, { desc = "Harpoon 3" })
+			vim.keymap.set("n", "<C-4>", function()
+				harpoon:list():select(4)
+			end, { desc = "Harpoon 4" })
+		end,
+	},
+	{
+		"folke/flash.nvim",
+		event = "VeryLazy",
+		opts = {},
+		keys = {
+			{
+				"s",
+				mode = { "n", "x", "o" },
+				function()
+					require("flash").jump()
+				end,
+				desc = "Flash",
+			},
+			{
+				"S",
+				mode = { "n", "x", "o" },
+				function()
+					require("flash").treesitter()
+				end,
+				desc = "Flash Treesitter",
+			},
+		},
+	},
+	{
+		"greggh/claude-code.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		config = function()
+			require("claude-code").setup({
+				git = {
+					use_git_root = true,
+				},
+				-- window = {
+				-- position = "vertical",
+				-- split_ratio = 0.35,
+				-- },
+				refresh = {
+					enable = true,
+					show_notifications = true,
+				},
+				keymaps = {
+					window_navigation = true,
+				},
+			})
+		end,
+		keys = {
+			{ "<leader>cc", "<cmd>ClaudeCode<CR>", desc = "Toggle Claude Code" },
+		},
+	},
+	{
+		"folke/snacks.nvim",
+		priority = 1000,
+		lazy = false,
+		---@type snacks.Config
+		opts = {
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
+			bigfile = { enabled = true },
+			dashboard = { enabled = true },
+			explorer = { enabled = true },
+			indent = { enabled = true },
+			input = { enabled = true },
+			picker = { enabled = true },
+			notifier = { enabled = true },
+			quickfile = { enabled = true },
+			scope = { enabled = true },
+			scroll = { enabled = true },
+			statuscolumn = { enabled = true },
+			words = { enabled = true },
+		},
+		keys = {
+
+			{
+				"]]",
+				function()
+					Snacks.words.jump(vim.v.count1)
+				end,
+				desc = "Next Reference",
+				mode = { "n", "t" },
+			},
+			{
+				"[[",
+				function()
+					Snacks.words.jump(-vim.v.count1)
+				end,
+				desc = "Prev Reference",
+				mode = { "n", "t" },
+			},
+		},
+	},
 }, {
 	ui = {
 		-- If you are using a Nerd Font: set icons to an empty table which will use the
